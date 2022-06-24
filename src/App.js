@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import { createTheme, ThemeProvider } from "@mui/material";
+import { BrowserRouter } from "react-router-dom";
+import AppRouter from "./AppRouter";
+import ContextComponent from "./Context";
 
-function App() {
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#FD2D01",
+    },
+    secondary: {
+      main: "#FFD7D7",
+    },
+    tertiary: {
+      main: "#4E5166",
+    },
+  },
+});
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ContextComponent>
+      <ThemeProvider theme={theme}>
+        <BrowserRouter basename={window.location.search}>
+          <AppRouter />
+        </BrowserRouter>
+      </ThemeProvider>
+    </ContextComponent>
   );
-}
+};
 
 export default App;
